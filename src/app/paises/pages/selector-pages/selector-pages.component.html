@@ -1,1 +1,74 @@
-<p>selector-pages works!</p>
+<p class="mt-5">Selectores anidados</p>
+<hr>
+
+<form [formGroup]="paisForm" (ngSubmit)="guardar()">
+     <!-- Region -->
+    <div class="row mb-3">
+        <div class="col">
+            <label class="form-label">Continentes:</label>
+            <select class="form-control" 
+                    formControlName="region">
+                <option value=""> -- Seleccione Continente --</option>
+                <option *ngFor="let region of regiones"
+                        [value]="region| lowercase">
+                        {{region}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <!-- Pais -->
+    <div class="row mb-3" *ngIf="paises.length > 0">
+        <div class="col">
+            <label class="form-label">Paises:</label>
+            <select class="form-control" 
+                    formControlName="pais">
+                <option value=""> -- Seleccione Pais --</option>
+                <option *ngFor="let pais of paises" 
+                        [value]="pais.alpha3Code">
+                    {{pais.name}}
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Fronteras -->
+    <div class="row mb-3" *ngIf="fronteras.length > 0">
+        <div class="col">
+            <label class="form-label">Fronteras:</label>
+            <select class="form-control" formControlName="frontera">
+                <option value=""> -- Seleccione el pais fronterizo --</option>
+                <option *ngFor="let pais of fronteras" 
+                         [value]="pais.alpha3Code">
+                    <!-- This way was made with custom pipe to tansform
+                         the code country to the name country
+                        {{frontera | nombrePais | async}} 
+                    -->
+                        {{pais.name}}
+                </option> 
+            </select>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="cargando">
+        <div class="col">
+            <div class="alert alert-primary">
+                Cargando...
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary float-end"
+                    type="submit">
+                Seleccionar
+            </button>
+        </div>
+    </div>
+</form>
+
+<br>
+<h3>paisFormulario Valid: <span>{{paisForm.valid | json}}</span></h3>
+<h3>paisFormulario Value: </h3>
+<pre>{{paisForm.value | json}}</pre>
+<pre>Fronteras: {{fronteras | json}}</pre>

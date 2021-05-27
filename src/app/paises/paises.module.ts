@@ -4,12 +4,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { PaisesRoutingModule } from './paises-routing.module';
 import { SelectorPagesComponent } from './pages/selector-pages/selector-pages.component';
+import { NombrePaisPipe } from './pipes/nombre-pais.pipe';
 
 
 
 @NgModule({
   declarations: [
-    SelectorPagesComponent
+    SelectorPagesComponent,
+    NombrePaisPipe
   ],
   imports: [
     CommonModule,
